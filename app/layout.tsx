@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,11 +15,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased bg-dark-2`}
-      >
-        {children}
-      </body>
+      <ClerkProvider appearance={{
+        layout: {
+          socialButtonsVariant: "iconButton",
+          logoImageUrl: "/icons/logo.svg",
+        },
+        variables: {
+          colorText: "#fff",
+          colorPrimary: "#0E78F9",
+          colorBackground: "#1C1F2E",
+          colorInputBackground: "#252A41",
+          colorInputText: "#fff",
+        },
+      }}>
+        <body className={`antialiased bg-dark-2`}>
+          {children}
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
