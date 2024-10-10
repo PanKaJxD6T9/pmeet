@@ -64,7 +64,7 @@ const PersonalRoom = () => {
         <Table title="Invite Link" description={meetingLink} />
       </div>
       <div className="flex gap-5">
-        <Button className="bg-blue-1" onClick={startRoom}>
+        <Button className="bg-[#5B3487]" onClick={startRoom}>
           Start Meeting
         </Button>
         <Button
