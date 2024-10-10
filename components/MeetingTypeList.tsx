@@ -9,6 +9,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useToast } from "@/hooks/use-toast"
 import { Textarea } from "@/components/ui/textarea"
 import ReactDatePicker from 'react-datepicker'
+import { Input } from './ui/input';
 
 const MeetingTypeList = () => {
 
@@ -113,14 +114,27 @@ const MeetingTypeList = () => {
           buttonText="Schedule Meeting"
           handleClick={createMeeting}
         >
-          <div className='flex flex-col gap-2.5'>
-            <label htmlFor="" className='text-base text-normal leading-[22px] text-sky-2'>Meeting Description</label>
-            <Textarea className='border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0' onChange={(e)=>{
-              setValues({...values, description: e.target.value})
-            }}/>
+          <div className="flex flex-col gap-2.5">
+            <label
+              htmlFor=""
+              className="text-base text-normal leading-[22px] text-sky-2"
+            >
+              Meeting Description
+            </label>
+            <Textarea
+              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              onChange={(e) => {
+                setValues({ ...values, description: e.target.value });
+              }}
+            />
           </div>
-          <div className='flex w-full flex-col gap-2.5'>
-            <label htmlFor="" className='text-base text-normal leading-[22px] text-sky-2'>Meeting Date & Time</label>
+          <div className="flex w-full flex-col gap-2.5">
+            <label
+              htmlFor=""
+              className="text-base text-normal leading-[22px] text-sky-2"
+            >
+              Meeting Date & Time
+            </label>
             <ReactDatePicker
               selected={values.dateTime}
               onChange={(date) => setValues({ ...values, dateTime: date! })}
@@ -140,12 +154,12 @@ const MeetingTypeList = () => {
           title="Meeting Created"
           className="text-center"
           buttonText="Copy Meeting Link"
-          handleClick={()=>{
-            navigator.clipboard.writeText(meetingLink)
-            toast({title: "Link Copied"})
+          handleClick={() => {
+            navigator.clipboard.writeText(meetingLink);
+            toast({ title: "Link Copied" });
           }}
-          image='/icons/checked.svg'
-          buttonIcon='/icons/copy.svg'
+          image="/icons/checked.svg"
+          buttonIcon="/icons/copy.svg"
         />
       )}
 
@@ -157,6 +171,21 @@ const MeetingTypeList = () => {
         buttonText="Start Meeting"
         handleClick={createMeeting}
       />
+
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Enter Meeting Link"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={()=> router.push(values.link)}
+      >
+        <Input
+          placeholder="Meeting link"
+          onChange={(e) => setValues({ ...values, link: e.target.value })}
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+      </MeetingModal>
     </section>
   );
 }
