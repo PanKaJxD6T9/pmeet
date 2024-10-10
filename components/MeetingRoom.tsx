@@ -18,7 +18,7 @@ import Loader from './Loader';
   
 
 
-type callLayoutType = 'grid' | 'speaker-left' | 'speaker-right'
+type callLayoutType = 'grid' | 'bottom'
 
 
 const MeetingRoom = () => {
@@ -27,16 +27,14 @@ const MeetingRoom = () => {
     const router = useRouter();
     const isPersonalRoom = !!searchParams.get('personal')
 
-    const [layout, setLayout] = useState('speaker-left')
+    const [layout, setLayout] = useState('grid')
 
     const CallLayout = () => {
         switch (layout) {
-            case 'grid':
-                return <PaginatedGridLayout />
-            case 'speaker-right':
-                return <SpeakerLayout participantsBarPosition='left' />
+            case 'bottom':
+                return <SpeakerLayout participantsBarPosition='bottom' /> 
             default:
-                return <SpeakerLayout participantsBarPosition='right' />    
+                return <PaginatedGridLayout />   
         }
     }
 
@@ -72,7 +70,7 @@ const MeetingRoom = () => {
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent className='border-dark-1 bg-dark-1 text-white'>
-            {['Grid', 'Speaker-Left', 'Speaker-Right'].map((item, index) => (
+            {['Grid', 'Bottom'].map((item, index) => (
                 <div key={index}>
                     <DropdownMenuItem className='cursor-pointer' onClick={()=>{setLayout(item.toLowerCase() as callLayoutType)}}>
                         {item}
