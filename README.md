@@ -94,5 +94,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 
 - Public assets used in the project can be found [here](https://drive.google.com/file/d/1NToAevqAbxi7PTjXgw-oHzEY0X_WQJlF/view?usp=drive_link)
-
-- Deployed [PMeet](https://pmeet.vercel.app) App
